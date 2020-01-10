@@ -7,138 +7,37 @@ import java.util.Deque;
 public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
-//        solution.recurse("sin(2*(-5+1.5*4)+28)", 0); //expected output 0.5 6
-//        solution.recurse("(5+3)-(6-5)", 0); //expected output 0.5 6
-//        solution.recurse("sin((5+3)-(6-5))", 0); //expected output 0.5 6
-//        solution.recurse("(6-5)", 0); //expected output 0.5 6
-//        solution.recurse("tan(45)", 0);  System.out.println("1 1 - expected output");
-//        solution.recurse("tan(-45)", 0);  System.out.println("-1 2 - expected output");
-        solution.compute("0.305", 0);  System.out.println("0.3 0 - expected output");
-//        solution.recurse("0.3051", 0);  System.out.println("0.31 - expected output");
-//        solution.recurse("(0.3051)", 0);  System.out.println("0.31 - expected output");
-//        solution.recurse("1+(1+(1+1)*(1+1))*(1+1)+1", 0);  System.out.println("12 8 - expected output");
-//        solution.recurse("tan(44+sin(89-cos(180)^2))", 0);  System.out.println("1 6 - expected output");
-//        solution.recurse("-2+(-2+(-2)-2*(2+2))", 0);  System.out.println("-14 8 - expected output");
-//        solution.recurse("sin(80+(2+(1+1))*(1+1)+2)", 0);  System.out.println("1 7 - expected output");
-//        solution.recurse("1+4/2/2+2^2+2*2-2^(2-1+1)", 0);  System.out.println("6 11 - expected output");
-//        solution.recurse("10-2^(2-1+1)", 0);  System.out.println("6 4 - expected output");
-//        solution.recurse("2^10+2^(5+5)", 0);  System.out.println("2048 4 - expected output");
-//        solution.recurse("1.01+(2.02-1+1/0.5*1.02)/0.1+0.25+41.1", 0);  System.out.println("72.96 8 - expected output");
-//        solution.recurse("0.000025+0.000012", 0);  System.out.println("0 1 - expected output");
-//        solution.recurse("-2-(-2-1-(-2)-(-2)-(-2-2-(-2)-2)-2-2)", 0);  System.out.println("-3 16 - expected output");
-//        solution.recurse("cos(3 + 19*3)", 0);  System.out.println("0.5 3 - expected output");
+        solution.compute("sin(2*(-5+1.5*4)+28)"); //expected output 0.5 6
+        solution.compute("(5+3)-(6-5)"); //expected output 0.5 6
+        solution.compute("sin((5+3)-(6-5))"); //expected output 0.5 6
+        solution.compute("(6-5)"); //expected output 0.5 6
+        solution.compute("tan(45)");  //System.out.println("1 1 - expected output");
+        solution.compute("tan(-45)");  //System.out.println("-1 2 - expected output");
+        solution.compute("0.305");  //System.out.println("0.3 0 - expected output");
+        solution.compute("0.3051");  //System.out.println("0.31 - expected output");
+        solution.compute("(0.3051)");  //System.out.println("0.31 - expected output");
+        solution.compute("1+(1+(1+1)*(1+1))*(1+1)+1");  //System.out.println("12 8 - expected output");
+        solution.compute("tan(44+sin(89-cos(180)^2))");  //System.out.println("1 6 - expected output");
+        solution.compute("-2+(-2+(-2)-2*(2+2))");  //System.out.println("-14 8 - expected output");
+        solution.compute("sin(80+(2+(1+1))*(1+1)+2)");  //System.out.println("1 7 - expected output");
+        solution.compute("1+4/2/2+2^2+2*2-2^(2-1+1)");  //System.out.println("6 11 - expected output");
+        solution.compute("10-2^(2-1+1)");  //System.out.println("6 4 - expected output");
+        solution.compute("2^10+2^(5+5)");  //System.out.println("2048 4 - expected output");
+        solution.compute("1.01+(2.02-1+1/0.5*1.02)/0.1+0.25+41.1");  //System.out.println("72.96 8 - expected output");
+        solution.compute("0.000025+0.000012");  //System.out.println("0 1 - expected output");
+        solution.compute("-2-(-2-1-(-2)-(-2)-(-2-2-(-2)-2)-2-2)");  //System.out.println("-3 16 - expected output");
+        solution.compute("cos(3 + 19*3)");  //System.out.println("0.5 3 - expected output");
     }
 
-    public void compute(final String expression, int countOperation) {
-        //implement
-//        ArrayList<String> tokenList = mathParser.parse(expression);
-//        for (String string : tokenList) {
-//            System.out.println(string);
-//        }
-
-//        int lastOpenBracketIndex = 0;
-//        for (int i = 0; i < tokenList.size(); i++) {
-//            if (tokenList.get(i).equals("(")) {
-//                lastOpenBracketIndex = i;
-//            }
-//        }
-//
-//        int firstCloseBracketIndex = 0;
-//        for (int i = 0; i < tokenList.size(); i++) {
-//            if (tokenList.get(i).equals(")")) {
-//                firstCloseBracketIndex = i;
-//                break;
-//            }
-//
-//        int lastOpenBracketIndex = 0;
-//        int firstCloseBracketIndex = 0;
-//        boolean hasOpen = false;
-//        ArrayList<String> bracketExpressions = new ArrayList<>();
-//        for (int i = 0; i < tokenList.size(); i++) {
-//            if (tokenList.get(i).equals("(")) {
-//                lastOpenBracketIndex = i;
-//                hasOpen = true;
-//            }
-//            if (hasOpen) {
-//                if (tokenList.get(i).equals(")")) {
-//                    firstCloseBracketIndex = i;
-//                    hasOpen = false;
-//
-//                    String result = "";
-//                    for (int j = lastOpenBracketIndex; j <= firstCloseBracketIndex; j++) {
-//                        result += tokenList.get(j);
-//                    }
-//                    bracketExpressions.add(result);
-//                }
-//            }
-//
-//        }
-//        String[] splitResult = expression.split("\\+-/*^\\(\\)");
-//        for (String string : splitResult) {
-//            System.out.println(string);
-//        }
-//
-//        StringTokenizer tokenizer = new StringTokenizer(expression, "+-/*^()", true);
-//        String prev = "";
-//        String curr = "";
-//        while (tokenizer.hasMoreTokens()) {
-//            curr = tokenizer.nextToken();
-//            System.out.println(curr);
-//        }
-
-
-        int lastOpenBracketIndex = 0;
-        int firstCloseBracketIndex = 0;
-        boolean hasOpen = false;
-        String bracketExpression = "";
-        for (int i = 0; i < expression.length(); i++) {
-            if (expression.charAt(i) == '(') {
-                lastOpenBracketIndex = i;
-                hasOpen = true;
-            }
-            if (hasOpen) {
-                if (expression.charAt(i) == ')') {
-                    firstCloseBracketIndex = i;
-                    hasOpen = false;
-
-                    bracketExpression = expression.substring(lastOpenBracketIndex, firstCloseBracketIndex + 1);
-                    break;
-                }
-            }
-        }
-
-//        System.out.println(bracketExpression);
-        bracketExpression = bracketExpression.replace("(", "");
-        bracketExpression = bracketExpression.replace(")", "");
-
-
-//        System.out.println(bracketExpression.matches("\\d+\\.*\\d*"));;
-
-//        MathParser mathParser = new MathParser();
-//        ArrayList<String> tokenList = mathParser.parse(bracketExpression);
-//        for (String string : tokenList) {
-//            System.out.println(string);
-//        }
+    public void compute(final String expression) {
         MathParser mathParser = new MathParser();
         ArrayList<String> mathTokenList = mathParser.parse(expression);
 
-        System.out.println("Polish");
         ReversePolishNotation reversePolishNotation = new ReversePolishNotation();
         ArrayList<String> reverseList = reversePolishNotation.parse(mathTokenList);
-//        ArrayList<String> reverseList = reversePolishNotation.parse(expression);
 
-
-//        for (String string : reverseList) {
-//            System.out.println(string);
-//        }
-
-        System.out.println("Calc");
         String result = reversePolishNotation.calc(reverseList);
-        System.out.println(new BigDecimal(result).setScale(2, RoundingMode.HALF_UP));
-    }
-
-    public Solution() {
-        //don't delete
+        System.out.println("Result: " + new BigDecimal(result).setScale(2, RoundingMode.HALF_UP));
     }
 }
 
@@ -161,7 +60,6 @@ class MathParser {
         if (isDelimiter(expression.charAt(expInd))) {
             token += expression.charAt(expInd);
             expInd++;
-//            tokenList.add(token);
         } else if (Character.isDigit(expression.charAt(expInd))) {
             while (!isDelimiter(expression.charAt(expInd))) {
                 token += expression.charAt(expInd);
@@ -169,7 +67,6 @@ class MathParser {
                 if (expInd >= expression.length())
                     break;
             }
-//            tokenList.add(token);
         } else if (Character.isLetter(expression.charAt(expInd))) {
             while (!isDelimiter(expression.charAt(expInd))) {
                 token += expression.charAt(expInd);
@@ -177,7 +74,6 @@ class MathParser {
                 if (expInd >= expression.length())
                     break;
             }
-//            tokenList.add(token);
         } else {
             expInd++;
         }
@@ -240,10 +136,6 @@ class ReversePolishNotation {
                     while (!operationStack.isEmpty() && (priority(curr) <= priority(operationStack.peek()))) {
                         postfix.add(operationStack.pop());
                     }
-//                    while (!operationStack.isEmpty() && (priority(curr) <= priority(operationStack.peek()) || isFunction(operationStack.peek()))) {
-//                        postfix.add(operationStack.pop());
-//                    }
-
                 }
                 operationStack.push(curr);
             }
@@ -365,13 +257,5 @@ class ReversePolishNotation {
             default:
                 return 6;
         }
-//        if (token.equals("+") || token.equals("-")) {
-//            return 1;
-//        } else if (token.equals("*") || token.equals("/")) {
-//            return 2;
-//        } else if (token.equals("^")) {
-//            return 3;
-//        }
-//        return 4;
     }
 }
