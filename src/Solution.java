@@ -89,8 +89,6 @@ class MathParser {
 }
 
 class ReversePolishNotation {
-    private ArrayList<String> tokenList = new ArrayList<>();
-
     public ArrayList<String> parse(ArrayList<String> mathTokenList) {
         Deque<String> operationStack = new ArrayDeque<>();
         ArrayList<String> postfix = new ArrayList<>();
@@ -153,55 +151,6 @@ class ReversePolishNotation {
         return postfix;
     }
 
-    public String calc(ArrayList<String> postfix) {
-        Deque<Double> stack = new ArrayDeque<Double>();
-        Double b = 0.0;
-        Double a = 0.0;
-        for (String val : postfix) {
-            switch (val) {
-                case "sin":
-                    stack.push(round(java.lang.Math.sin(java.lang.Math.toRadians(stack.pop()))));
-                    break;
-                case "cos":
-                    stack.push(round(java.lang.Math.cos(java.lang.Math.toRadians(stack.pop()))));
-                    break;
-                case "tan":
-                    stack.push(round(java.lang.Math.tan(java.lang.Math.toRadians(stack.pop()))));
-                    break;
-                case "^":
-                    b = stack.pop();
-                    a = stack.pop();
-                    stack.push(round(java.lang.Math.pow(a, b)));
-                    break;
-                case "*":
-                    stack.push(round(stack.pop() * stack.pop()));
-                    break;
-                case "/":
-                    b = stack.pop();
-                    a = stack.pop();
-                    stack.push(round(a / b));
-                    break;
-                case "+":
-                    stack.push(stack.pop() + stack.pop());
-                    break;
-                case "-":
-                    b = stack.pop();
-                    a = stack.pop();
-                    stack.push(a - b);
-                    break;
-                case "u-":
-                    stack.push(-stack.pop());
-                    break;
-                default: stack.push(round(Double.valueOf(val)));
-            }
-        }
-        return Double.toString(stack.pop());
-    }
-
-    private Double round(Double value) {
-        return new BigDecimal(value).setScale(4, RoundingMode.HALF_UP).doubleValue();
-    }
-
     private boolean isDigit(String token) {
         if (token.matches("\\d+\\.*\\d*")) {
             return true;
@@ -257,5 +206,55 @@ class ReversePolishNotation {
             default:
                 return 6;
         }
+    }
+
+    public String calc(ArrayList<String> postfix) {
+        Deque<Double> stack = new ArrayDeque<Double>();
+        double b;
+        double a;
+        for (String val : postfix) {
+            switch (val) {
+                case "sin":
+                    stack.push(round(java.lang.Math.sin(java.lang.Math.toRadians(stack.pop()))));
+                    break;
+                case "cos":
+                    stack.push(round(java.lang.Math.cos(java.lang.Math.toRadians(stack.pop()))));
+                    break;
+                case "tan":
+                    stack.push(round(java.lang.Math.tan(java.lang.Math.toRadians(stack.pop()))));
+                    break;
+                case "^":
+                    b = stack.pop();
+                    a = stack.pop();
+                    stack.push(round(java.lang.Math.pow(a, b)));
+                    break;
+                case "*":
+                    stack.push(round(stack.pop() * stack.pop()));
+                    break;
+                case "/":
+                    b = stack.pop();
+                    a = stack.pop();
+                    stack.push(round(a / b));
+                    break;
+                case "+":
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+                case "-":
+                    b = stack.pop();
+                    a = stack.pop();
+                    stack.push(a - b);
+                    break;
+                case "u-":
+                    stack.push(-stack.pop());
+                    break;
+                default:
+                    stack.push(round(Double.valueOf(val)));
+            }
+        }
+        return Double.toString(stack.pop());
+    }
+
+    private Double round(Double value) {
+        return new BigDecimal(value).setScale(4, RoundingMode.HALF_UP).doubleValue();
     }
 }
